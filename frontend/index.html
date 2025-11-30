@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating the Next Generation of Engineers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: white;
+            font-family: 'Roboto', sans-serif;
+        }
+        .glass-button {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+        }
+        .glass-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+        }
+        body {
+            overflow: hidden;
+        }
+        #page-container {
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translate(0, 0);
+        }
+        #page-container.show-calendar {
+            transform: translateX(-100vw);
+        }
+        #page-container.show-waitlist {
+            transform: translateY(-100vh);
+        }
+        #main-horizontal {
+            display: flex;
+            width: 200vw;
+        }
+        #landing-section, #cal-section {
+            min-height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        #waitlist-section {
+            min-height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 20px;
+            background-color: white;
+            position: relative;
+        }
+        #landing-section {
+            padding-bottom: 200px;
+            position: relative;
+            background-image: url('public/images/watercolor-abstract-shape-isolated-on-white-background-paint-splashes-splashes-brush-strokes-design-vector-set-soft-watercolor-splash-smudges-background-png.png');
+            background-position: center -40px;
+            background-repeat: no-repeat;
+            background-size: 80%;
+        }
+        .top-logo {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+        }
+        .backed-by-badge {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        .backed-by-badge img {
+            height: 24px;
+        }
+        #cal-embed {
+            background: white;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 1000px;
+            height: 700px;
+            margin: 0 auto;
+        }
+        .back-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: transform 0.2s ease;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+        }
+        .back-button:hover {
+            transform: scale(1.05);
+        }
+        .input-field {
+            background: white;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            color: #333;
+            padding: 14px 18px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        .input-field::placeholder {
+            color: #999;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: rgba(255, 136, 171, 1);
+        }
+        .submit-button {
+            background: rgba(255, 136, 171, 1);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            padding: 14px 24px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 136, 171, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div id="page-container">
+        <div id="main-horizontal">
+            <div id="landing-section" class="px-4 py-12">
+            <div class="text-center">
+                <div class="backed-by-badge" style="margin: 0 auto 20px;">
+                    <span>Backed by</span>
+                    <img src="public/images/logo.svg" alt="Backed by">
+                </div>
+                <h1 class="text-3xl min-[380px]:text-4xl sm:text-5xl md:text-7xl font-normal mb-6 leading-none tracking-tighter" style="letter-spacing:-0.03em;word-spacing:-0.03em;line-height:1.05;color:white;text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);">
+                    Creating the next generation<br>of engineers
+                </h1>
+                <p class="text-base sm:text-lg max-w-3xl mx-auto mb-8 px-4" style="color:rgba(255, 255, 255, 0.8);text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);">
+                    AI-powered platform that teaches kids to code, personalizes learning paths, and builds collaboration—fully integrated into your district's existing classroom systems.
+                </p>
+                <div class="flex gap-4 justify-center mt-8">
+                    <button class="glass-button px-10 py-3 text-white font-medium" onclick="openCal()">Book a Consultation Call ➜</button>
+                    <button class="glass-button px-10 py-3 text-white font-medium" onclick="openWaitlist()">Join the Waitlist ↓</button>
+                </div>
+            </div>
+            </div>
+
+            <div id="cal-section" class="px-4 py-12">
+                <button class="back-button" onclick="goBack()">← Back</button>
+                <div id="cal-embed">
+                    <iframe src="https://cal.com/youdahe-asfaw-np88fc/30min" width="100%" height="100%" frameborder="0" style="border-radius: 20px;"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div id="waitlist-section" class="px-4">
+            <button class="back-button" onclick="goBackFromWaitlist()" style="margin-bottom: 20px;">↑ Back</button>
+            <form onsubmit="submitWaitlistForm(event)" style="width: 100%; max-width: 500px;">
+                <div style="margin-bottom: 40px;">
+                    <label style="display: block; color: #666; font-size: 16px; font-weight: 400; margin-bottom: 10px;">Email</label>
+                    <input
+                        type="email"
+                        class="input-field"
+                        placeholder="Enter your email"
+                        required
+                        style="width: 100%;"
+                    >
+                </div>
+                <div style="margin-bottom: 40px;">
+                    <label style="display: block; color: #666; font-size: 16px; font-weight: 400; margin-bottom: 10px;">Full Name</label>
+                    <input
+                        type="text"
+                        class="input-field"
+                        placeholder="Enter your full name"
+                        required
+                        style="width: 100%;"
+                    >
+                </div>
+                <div style="margin-bottom: 40px;">
+                    <label style="display: block; color: #666; font-size: 16px; font-weight: 400; margin-bottom: 10px;">Position</label>
+                    <input
+                        type="text"
+                        class="input-field"
+                        placeholder="Student / Teacher / Parent"
+                        required
+                        style="width: 100%;"
+                    >
+                </div>
+                <button type="submit" class="submit-button" style="width: 100%;">
+                    Join Waitlist
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openCal() {
+            const container = document.getElementById('page-container');
+            container.classList.remove('show-waitlist');
+            container.classList.add('show-calendar');
+        }
+
+        function goBack() {
+            document.getElementById('page-container').classList.remove('show-calendar');
+        }
+
+        function openWaitlist() {
+            const container = document.getElementById('page-container');
+            container.classList.remove('show-calendar');
+            container.classList.add('show-waitlist');
+        }
+
+        function goBackFromWaitlist() {
+            document.getElementById('page-container').classList.remove('show-waitlist');
+        }
+
+        function submitWaitlistForm(event) {
+            event.preventDefault();
+            alert('Thank you for joining the waitlist! We will be in touch soon.');
+            goBackFromWaitlist();
+        }
+    </script>
+</body>
+</html>
