@@ -67,7 +67,7 @@
         #landing-section {
             padding-bottom: 200px;
             position: relative;
-            background-image: url('public/images/watercolor-abstract-shape-isolated-on-white-background-paint-splashes-splashes-brush-strokes-design-vector-set-soft-watercolor-splash-smudges-background-png.png');
+            background-image: url('/images/watercolor-abstract-shape-isolated-on-white-background-paint-splashes-splashes-brush-strokes-design-vector-set-soft-watercolor-splash-smudges-background-png.png');
             background-position: center -40px;
             background-repeat: no-repeat;
             background-size: 80%;
@@ -165,7 +165,7 @@
             <div class="text-center">
                 <div class="backed-by-badge" style="margin: 0 auto 20px;">
                     <span>Backed by</span>
-                    <img src="public/images/logo.svg" alt="Backed by">
+                    <img src="/images/logo.svg" alt="Backed by">
                 </div>
                 <h1 class="text-3xl min-[380px]:text-4xl sm:text-5xl md:text-7xl font-normal mb-6 leading-none tracking-tighter" style="letter-spacing:-0.03em;word-spacing:-0.03em;line-height:1.05;color:white;text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);">
                     Creating the next generation<br>of engineers
@@ -190,7 +190,7 @@
 
         <div id="waitlist-section" class="px-4">
             <button class="back-button" onclick="goBackFromWaitlist()" style="margin-bottom: 20px;">↑ Back</button>
-            <form name="waitlist" onsubmit="submitWaitlistForm(event)" style="width: 100%; max-width: 500px;">
+            <form id="waitlist-form" name="waitlist" onsubmit="submitWaitlistForm(event)" style="width: 100%; max-width: 500px;">
                 <div style="margin-bottom: 40px;">
                     <label style="display: block; color: #666; font-size: 16px; font-weight: 400; margin-bottom: 10px;">Email</label>
                     <input
@@ -228,6 +228,11 @@
                     Join Waitlist
                 </button>
             </form>
+            <div id="thank-you-message" style="display: none; text-align: center; width: 100%; max-width: 500px;">
+                <h2 style="color: #333; font-size: 28px; font-weight: 500; margin-bottom: 20px;">Thank you for joining our waitlist!</h2>
+                <p style="color: #666; font-size: 18px; margin-bottom: 40px;">We will reach out once we deploy.</p>
+                <img src="/images/logo.svg" alt="Logo" style="width: 120px; height: auto; margin: 0 auto;">
+            </div>
         </div>
     </div>
 
@@ -250,6 +255,9 @@
 
         function goBackFromWaitlist() {
             document.getElementById('page-container').classList.remove('show-waitlist');
+            // Reset the form view for next time
+            document.getElementById('waitlist-form').style.display = 'block';
+            document.getElementById('thank-you-message').style.display = 'none';
         }
 
         async function submitWaitlistForm(event) {
@@ -274,9 +282,12 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    alert('Thank you for joining the waitlist! We will be in touch soon.');
+                    // Hide the form and show thank you message
+                    document.getElementById('waitlist-form').style.display = 'none';
+                    document.getElementById('thank-you-message').style.display = 'block';
+
+                    // Reset form for next time
                     form.reset();
-                    goBackFromWaitlist();
                 } else {
                     alert('Error: ' + (data.error || 'Failed to submit form'));
                 }
