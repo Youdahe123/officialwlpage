@@ -23,6 +23,8 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+            white-space: nowrap;
+            text-align: center;
         }
         .glass-button:hover {
             transform: translateY(-5px);
@@ -52,12 +54,17 @@
             flex-shrink: 0;
         }
         #landing-section {
-            padding-bottom: 200px;
+            padding-bottom: 80px;
             position: relative;
             background-image: url('public/images/watercolor-abstract-shape-isolated-on-white-background-paint-splashes-splashes-brush-strokes-design-vector-set-soft-watercolor-splash-smudges-background-png.png');
             background-position: center -40px;
             background-repeat: no-repeat;
             background-size: 80%;
+        }
+        @media (min-width: 768px) {
+            #landing-section {
+                padding-bottom: 200px;
+            }
         }
         .top-logo {
             position: absolute;
@@ -73,13 +80,20 @@
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 10px 20px;
+            padding: 8px 16px;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             color: white;
-            font-size: 14px;
+            font-size: 12px;
             margin-top: 20px;
+        }
+        @media (min-width: 640px) {
+            .backed-by-badge {
+                padding: 10px 20px;
+                gap: 10px;
+                font-size: 14px;
+            }
         }
         .backed-by-badge img {
             height: 24px;
@@ -89,8 +103,13 @@
             border-radius: 20px;
             width: 100%;
             max-width: 1000px;
-            height: 700px;
+            height: 600px;
             margin: 0 auto;
+        }
+        @media (min-width: 768px) {
+            #cal-embed {
+                height: 700px;
+            }
         }
         .back-button {
             background: rgba(255, 255, 255, 0.2);
@@ -111,6 +130,36 @@
         .back-button:hover {
             transform: scale(1.05);
         }
+        .mobile-pink-text {
+            color: rgba(255, 136, 171, 1);
+            text-shadow: none;
+        }
+        .mobile-pink-text-light {
+            color: rgba(255, 136, 171, 1);
+            text-shadow: none;
+        }
+        .mobile-button-text {
+            color: rgba(255, 136, 171, 1);
+        }
+        .mobile-badge-text {
+            color: rgba(255, 136, 171, 1) !important;
+        }
+        @media (min-width: 640px) {
+            .mobile-pink-text {
+                color: white;
+                text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+            }
+            .mobile-pink-text-light {
+                color: rgba(255, 255, 255, 0.8);
+                text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+            }
+            .mobile-button-text {
+                color: white;
+            }
+            .mobile-badge-text {
+                color: white !important;
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen">
@@ -118,19 +167,19 @@
         <div id="main-horizontal">
             <div id="landing-section" class="px-4 py-12">
             <div class="text-center">
-                <div class="backed-by-badge" style="margin: 0 auto 20px;">
+                <div class="backed-by-badge mobile-badge-text" style="margin: 0 auto 20px;">
                     <span>Backed by</span>
                     <img src="public/images/logo.svg" alt="Backed by">
                 </div>
-                <h1 class="text-3xl min-[380px]:text-4xl sm:text-5xl md:text-7xl font-normal mb-6 leading-none tracking-tighter" style="letter-spacing:-0.03em;word-spacing:-0.03em;line-height:1.05;color:white;text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);">
+                <h1 class="text-3xl min-[380px]:text-4xl sm:text-5xl md:text-7xl font-normal mb-6 leading-none tracking-tighter mobile-pink-text" style="letter-spacing:-0.03em;word-spacing:-0.03em;line-height:1.05;">
                     Creating the next generation<br>of engineers
                 </h1>
-                <p class="text-base sm:text-lg max-w-3xl mx-auto mb-8 px-4" style="color:rgba(255, 255, 255, 0.8);text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);">
+                <p class="text-base sm:text-lg max-w-3xl mx-auto mb-8 px-4 mobile-pink-text-light">
                     AI-powered platform that teaches kids to code, personalizes learning paths, and builds collaboration—fully integrated into your district's existing classroom systems.
                 </p>
-                <div class="flex gap-4 justify-center mt-8">
-                    <button class="glass-button px-10 py-3 text-white font-medium" onclick="openCal()">Book a Consultation Call ➜</button>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAOjuq6sCfhafbpMAlOmBMWSco4OZz8nvRMMmrHx8radEZtw/viewform?usp=dialog" target="_blank" class="glass-button px-10 py-3 text-white font-medium" style="text-decoration: none;">Join the Waitlist</a>
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mt-8 max-w-lg mx-auto">
+                    <button class="glass-button px-6 sm:px-10 py-3 mobile-button-text font-medium text-sm sm:text-base" onclick="openCal()">Book a Consultation Call ➜</button>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAOjuq6sCfhafbpMAlOmBMWSco4OZz8nvRMMmrHx8radEZtw/viewform?usp=dialog" target="_blank" class="glass-button px-6 sm:px-10 py-3 mobile-button-text font-medium text-sm sm:text-base" style="text-decoration: none;">Join the Waitlist</a>
                 </div>
             </div>
             </div>
